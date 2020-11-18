@@ -1,33 +1,44 @@
-Zabbix template apcupsd
+Zabbix Template "apcupsd extended"
 ==========================
 
-Tested on Zabbix Version 3.2
+Based on https://github.com/cavazquez/zabbix_template_apcupsd
 
-FEATURES
---------
-* Model
-* Driver
-* Shows the set in __apcupsd.conf__:
-  * MBATTCHG: Min battery charge % (BCHARGE) required for system shutdown
-  * MINTIMEL: Min battery runtime (MINUTES) required for system shutdown
-  * MAXTIME : Max battery runtime (TIMEOUT) after which system is shutdown
-* Status Connection
+*A big thanks to cavazquez for the work*
 
-
-
-REQUIREMENTS
+Requirements
 ------------
-* Zabbix server version 3.2
+* Zabbix Server, tested on :
+  * 5.0.4
+  * 5.2.1
+ * Zabbix Agent
+ * apcupsd
+ 
 
-INSTALLATION
+Installation
 ------------
-* Agent
-  * Copy __userparameter_apcupsd.conf__ to __/etc/zabbix/zabbix_agentd.d/userparameter_apcupsd.conf__
-  * Restart zabbix_agent
-* Server
-  * Import template __template_apcupsd.xml__ file
+* Agent side
+  * apcupsd
+   > apt install apcupsd -y
+   
+   * edit the configuration file __/etc/apcupsd/apcupsd.conf__ and comment the following line 
+   
+   > #DEVICE /dev/ttyS0
+   
+   reboot and verify by running the following command
+   
+   > apcaccess
+   
+   you will get something like this :
+   
+   > MODEL    : Back-UPS RS  650MI
+   > STATUS   : ONLINE
+   > LINEV    : 235.0 Volts
+  
+  * Zabbix Agent
+  
+
+* Server side
 
 
-LICENSE
--------
-GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+Values
+------------
